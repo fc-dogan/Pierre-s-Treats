@@ -16,7 +16,8 @@
 {
   <li>@Html.ActionLink($"{treat.Name}", "Details", new { id = treat.TreatId })</li>
 }
-
+@if (User.Identity.IsAuthenticated)
+{
 <p>@Html.ActionLink("Add new treat", "Create")</p>
-
+}
 <p>@Html.ActionLink("Home", "Index", "Home")</p>
