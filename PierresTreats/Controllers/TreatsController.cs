@@ -63,35 +63,39 @@ namespace PierresTreats.Controllers
     }
 
     
-    //  public ActionResult Delete(int id)
-    // {
-    //   var thisTreat = _db.Treats.FirstOrDefault(Treats => Treats.TreatId == id);
-    //   return View(thisTreat);
-    // }
+     public ActionResult Delete(int id)
+    {
+      var thisTreat = _db.Treats.FirstOrDefault(Treats => Treats.TreatId == id);
+      return View(thisTreat);
+    }
 
-    // [HttpPost, ActionName("Delete")]
-    // public ActionResult DeleteConfirmed(int id)
-    // {
-    //   var thisTreat = _db.Treats.FirstOrDefault(Treats => Treats.TreatId == id);
-    //   _db.Treats.Remove(thisTreat);
-    //   _db.SaveChanges();
-    //   return RedirectToAction("Index", "Flavors");
-    // }
+    [HttpPost, ActionName("Delete")]
+    public ActionResult DeleteConfirmed(int id)
+    {
+      var thisTreat = _db.Treats.FirstOrDefault(Treats => Treats.TreatId == id);
+      _db.Treats.Remove(thisTreat);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
 
-    // public ActionResult Edit(int id)
-    // {
-    //   var thisTreat = _db.Treats.FirstOrDefault(Treats => Treats.TreatId == id);
-    //   ViewBag.FlavorId = new SelectList(_db.Flavors, "FlavorId", "Name");
-    //   return View(thisTreat);
-    // }
+    public ActionResult Edit(int id)
+    {
+      var thisTreat = _db.Treats.FirstOrDefault(Treats => Treats.TreatId == id);
+      ViewBag.FlavorId = new SelectList(_db.Flavors, "FlavorId", "Name");
+      return View(thisTreat);
+    }
 
-    // [HttpPost]
-    // public ActionResult Edit(Treat treat)
-    // {
-    //   _db.Entry(treat).State = EntityState.Modified;
-    //   _db.SaveChanges();
-    //   return RedirectToAction("Index");
-    // }
+    [HttpPost]
+    public ActionResult Edit(Treat treat, int FlavorId)
+    {
+       if (FlavorId != 0)
+      {
+        _db.TreatFlavor.Add(new TreatFlavor() { FlavorId = FlavorId, TreatId = treat.TreatId });
+      }
+      _db.Entry(treat).State = EntityState.Modified;
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
 
   }
   
