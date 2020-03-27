@@ -35,7 +35,7 @@ namespace PierresTreats.Controllers
       return View();
     }
 
-    // [Authorize]
+    [Authorize]
     [HttpPost]
     public async Task<ActionResult> Create(Treat treat, int FlavorId)
     {

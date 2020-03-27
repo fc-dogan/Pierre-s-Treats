@@ -13,7 +13,7 @@ A web application with user authentication and a many-to-many relationship. The 
 
 | Behavior | Input | Output |
 |---|:---|:---|
-|When the user runs the application, they receive a welcome message along with the links for a list of flavors/treats, and for register/log in. | Home page | Welcome to Pierre's Sweet and Savory Treats!<br> ``See all flavors``<br>``See all treats`` <br>``Create an account``<br>``Log in``|
+|When the user runs the application, they receive a welcome message along with the links for a list of flavors/treats, and for register/log in. | Home page | Welcome to Pierre's Sweet and Savory Treats!<br> ``See all flavors``<br>``See all treats`` <br>``Account``|
 |When the user clicks "see all flavor", receives a list of flavors | ``see all flavors`` | Flavors : <br> * savory <br>  ``add a new flavor  `` |
 |When a logged in user clicks on "add a new flavor ", they receive a form to add a new flavor| ``add a new flavor  `` | Add a new flavor <br> Name : |
 |When a User Adds a new flavor they are directed to the flavors list page  | Name: Sweet | Flavors :<br> * savory <br> * sweet <br>  ``add a new flavor  `` |

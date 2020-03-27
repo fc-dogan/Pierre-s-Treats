@@ -16,7 +16,8 @@
 {
   <li>@Html.ActionLink($"{flavor.Name}", "Details", new { id = flavor.FlavorId })</li>
 }
-
+@if (User.Identity.IsAuthenticated)
+{
 <p>@Html.ActionLink("Add new flavor", "Create")</p>
-
+}
 <p>@Html.ActionLink("Home", "Index", "Home")</p>
