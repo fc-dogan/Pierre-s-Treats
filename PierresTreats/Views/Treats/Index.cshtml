@@ -3,26 +3,19 @@
 }
 
 @using PierresTreats.Models;
-@using System.Security.Claims
-@model IEnumerable<PierresTreats.Models.Treat>
-@* @model List<PierresTreats.Models.Treat>; *@
+@model List<PierresTreats.Models.Treat>;
 
-<h1>Treats  for @User.Identity.Name</h1>
+<h1>Treats</h1>
 
-@if (Model.Any())
-{
-  <ul>
-    @foreach (Treat treat in Model)
-    {
-      <li>@Html.ActionLink($"{treat.Name}", "Details", new { id = treat.TreatId })</li>
-    }
-  </ul>
-} 
-else
+@if (@Model.Count == 0)
 {
   <h3>No Treats have been added yet!</h3>
-}
+} 
 
+@foreach (Treat treat in Model)
+{
+  <li>@Html.ActionLink($"{treat.Name}", "Details", new { id = treat.TreatId })</li>
+}
 
 <p>@Html.ActionLink("Add new treat", "Create")</p>
 

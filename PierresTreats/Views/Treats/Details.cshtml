@@ -20,7 +20,7 @@ else
   @foreach(var join in Model.Flavors)
   {
     <li>@join.Flavor.Name</li>
-    @if (User.Identity.IsAuthenticated && ViewBag.ISCurrentUser)
+    @if (User.Identity.IsAuthenticated )
     {
       @using (Html.BeginForm("DeleteFlavor", "Treats"))
       {
@@ -33,7 +33,7 @@ else
 }
 
 <p>@Html.ActionLink("Back to list", "Index")</p>
-@if (User.Identity.IsAuthenticated && ViewBag.ISCurrentUser)
+@if (User.Identity.IsAuthenticated)
 {
   <p>@Html.ActionLink("Edit Treat", "Edit", new { id = Model.TreatId })</p>
   <p>@Html.ActionLink("Add a Flavor", "AddFlavor", new { id = Model.TreatId })</p>
