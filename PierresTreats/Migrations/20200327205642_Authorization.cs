@@ -2,7 +2,7 @@
 
 namespace PierresTreats.Migrations
 {
-    public partial class addIdentity : Migration
+    public partial class Authorization : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

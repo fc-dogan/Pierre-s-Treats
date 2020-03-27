@@ -11,21 +11,24 @@ using System.Security.Claims;
 
 namespace PierresTreats.Controllers
 {
+  [Authorize]
   public class TreatsController : Controller
   {
     private readonly PierresTreatsContext _db;
-    private readonly UserManager<ApplicationUser> _userManager;
-    
+    private readonly UserManager<ApplicationUser> _userManager; 
 
     public TreatsController(UserManager<ApplicationUser> userManager, PierresTreatsContext db)
     {
       _userManager = userManager;
       _db =db;
     }
-    public ActionResult Index()
+
+    public async Task<ActionResult> Index()
     {
-      List<Treat> model = _db.Treats.Include(treats => treats.Flavors).ToList();
-      return View(model);
+      var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      var currentUser = await _userManager.FindByIdAsync(userId);
+      var userTreats = _db.Treats.Where(entry => entry.User.Id == currentUser.Id);
+      return View(userTreats);
     }
 
     public ActionResult Create()
@@ -33,7 +36,8 @@ namespace PierresTreats.Controllers
       ViewBag.FlavorId = new SelectList(_db.Flavors, "FlavorId", "Name");
       return View();
     }
-    [Authorize]
+
+    // [Authorize]
     [HttpPost]
     public async Task<ActionResult> Create(Treat treat, int FlavorId)
     {
@@ -78,11 +82,19 @@ namespace PierresTreats.Controllers
     }
 
     
-     public ActionResult Delete(int id)
+    [Authorize]
+     public async Task<ActionResult> Delete(int id)
     {
-      var thisTreat = _db.Treats.FirstOrDefault(Treats => Treats.TreatId == id);
+      var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      var currentUser = await _userManager.FindByIdAsync(userId);
+      var thisTreat = _db.Treats.Where(entry => entry.User.Id == currentUser.Id ).FirstOrDefault(treats => treats.TreatId == id);
+      if (thisTreat == null)
+      {
+        return RedirectToAction ("Details", new{id =id});
+      }
       return View(thisTreat);
     }
+
 
     [HttpPost, ActionName("Delete")]
     public ActionResult DeleteConfirmed(int id)
@@ -92,19 +104,7 @@ namespace PierresTreats.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
-    // [Authorize]
-    //  public async Task<ActionResult> Delete(int id)
-    // {
-    //   var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-    //   var currentUser = await _userManager.FindByIdAsync(userId);
-    //   var thisTreat = _db.Treats.Where(entry => entry.User.Id == currentUser.Id ).FirstOrDefault(treats => treats.TreatId == id);
-    //   if (thisTreat == null)
-    //   {
-    //     return RedirectToAction ("Details", new{id =id});
-    //   }
-    //   return View(thisTreat);
-    // }
-
+  
 
     public ActionResult Edit(int id)
     {
