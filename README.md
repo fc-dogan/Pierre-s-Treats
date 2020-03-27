@@ -152,6 +152,7 @@ _No known bugs at this time._
 * ASP.NET Core MVC
 * MySQL, MySQL Workbench
 * Entity Framework Core
+* LINQ
 * VS Code
 * CSS
 * Bootstrap
