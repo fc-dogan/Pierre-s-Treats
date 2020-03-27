@@ -92,44 +92,51 @@ _Download Manually:_
 _In Terminal:_
 
 * Navigate to where you want this application to be saved, i.e.:
-```cd desktop```
+  ```
+  cd desktop
+  ```
 * Clone the file from GitHub with HTTPS
-```git clone https://github.com/fc-dogan/Pierre-s-Treats.git ```
+  ```
+  git clone https://github.com/fc-dogan/Pierre-s-Treats.git 
+  ```
 * Open file in your preferred text editor
- ```cd Pierre-s-Treats ```
+  ```
+  cd Pierre-s-Treats
+    ```
 * Change directories into the project directory
-  ``` cd Pierre-s-Treats/PierresTreats ```
+  ``` 
+  cd Pierre-s-Treats/PierresTreats
+   ```
 
 * Restore all dependencies
-  ``` dotnet restore```
+  ```
+   dotnet restore
+   ```
+* Build the project and dependencies
+   ```
+   dotnet build
+   ```
 
+## Create the Database
 
-<!-- ### Setup Database
-```
-> CREATE DATABASE fatma_dogan;
-> USE fatma_dogan;
-> CREATE TABLE `stylists` (
-  `StylistId` int NOT NULL AUTO_INCREMENT,
-  `Name` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`StylistId`)
-);
-> CREATE TABLE `clients` (
-  `ClientId` int NOT NULL AUTO_INCREMENT,
-  `Name` varchar(255) DEFAULT NULL,
-  `StylistId` int DEFAULT '0',
-  PRIMARY KEY (`ClientId`)
-); -->
+* Build the database
+  ```
+  dotnet ef migrations add Initial
+  dotnet ef database update
+  ```
 
-```
 _To run this application:_
 
-* Build the project and dependencies
-   ```dotnet build```
+
 * Run the program
-  ``` dotnet run```
+  ``` 
+  dotnet run
+  ```
    Note: To exit, simply press ```Ctrl + C```
 * Open the local hosted server
-  ``` http://localhost:5000 ```
+  ```
+   http://localhost:5000 
+   ```
 
 
 
